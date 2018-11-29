@@ -56,7 +56,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UserEntity userEntity) {
+    public UserEntity update(UserEntity userEntity) {
         //todo
+        UserEntity entity = this.findEntity(userEntity.getId());
+        if (userEntity.getImage() != null && !userEntity.getImage().equals("")) {
+            entity.setImage(userEntity.getImage());
+        }
+        return userRepository.save(entity);
+    }
+
+    @Override
+    public UserEntity login(UserEntity userEntity) {
+        return userRepository.findByUsernameAndPassword(userEntity.getUsername(), userEntity.getPassword());
     }
 }

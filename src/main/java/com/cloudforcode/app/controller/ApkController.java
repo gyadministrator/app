@@ -60,9 +60,15 @@ public class ApkController {
         List<ApkEntity> items = allEntity.getItems();
         ApkEntity apkEntity = items.get(items.size() - 1);
         BaseEntity<ApkEntity> baseEntity = new BaseEntity<>();
-        baseEntity.setCode(200);
-        baseEntity.setMessage("获取成功");
-        baseEntity.setData(apkEntity);
+        if (apkEntity != null) {
+            baseEntity.setCode(200);
+            baseEntity.setMessage("获取成功");
+            baseEntity.setData(apkEntity);
+        } else {
+            baseEntity.setCode(500);
+            baseEntity.setMessage("获取失败");
+            baseEntity.setData(null);
+        }
         return baseEntity;
     }
 }

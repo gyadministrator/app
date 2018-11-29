@@ -10,5 +10,7 @@ import com.cloudforcode.app.entity.UserEntity;
  * @description
  */
 public interface UserService extends BaseService<UserEntity, String> {
-    void update(UserEntity userEntity);
+    UserEntity update(UserEntity userEntity);
+
+    UserEntity login(UserEntity userEntity);
 }
