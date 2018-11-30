@@ -69,4 +69,9 @@ public class UserServiceImpl implements UserService {
     public UserEntity login(UserEntity userEntity) {
         return userRepository.findByUsernameAndPassword(userEntity.getUsername(), userEntity.getPassword());
     }
+
+    @Override
+    public UserEntity queryUserByPhone(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

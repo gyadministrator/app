@@ -13,4 +13,6 @@ public interface UserService extends BaseService<UserEntity, String> {
     UserEntity update(UserEntity userEntity);
 
     UserEntity login(UserEntity userEntity);
+
+    UserEntity queryUserByPhone(String username);
 }

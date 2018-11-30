@@ -31,12 +31,19 @@ public class UserController {
     @PostMapping("/addUser")
     public BaseEntity addEntity(@RequestBody UserEntity userEntity) {
         LoggerUtils.info(this.getClass(), "添加app" + userEntity.toString());
-        userEntity.setCreateTime(new Date());
-        userEntity = userService.addEntity(userEntity);
+        UserEntity u=userService.queryUserByPhone(userEntity.getUsername());
         BaseEntity<UserEntity> baseEntity = new BaseEntity<>();
-        baseEntity.setCode(200);
-        baseEntity.setData(userEntity);
-        baseEntity.setMessage("添加成功");
+        if (u==null) {
+            userEntity.setCreateTime(new Date());
+            userEntity = userService.addEntity(userEntity);
+            baseEntity.setCode(200);
+            baseEntity.setData(userEntity);
+            baseEntity.setMessage("添加成功");
+        }else {
+            baseEntity.setCode(500);
+            baseEntity.setData(userEntity);
+            baseEntity.setMessage("添加失败");
+        }
         return baseEntity;
     }
 

@@ -52,6 +52,11 @@ public class ApkEntity {
     private String content;
 
     /**
+     * 是否强制更新
+     */
+    private String constraint;
+
+    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
