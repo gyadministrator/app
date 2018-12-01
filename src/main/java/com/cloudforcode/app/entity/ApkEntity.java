@@ -54,7 +54,7 @@ public class ApkEntity {
     /**
      * 是否强制更新
      */
-    private String constraint;
+    private String isUpdate;
 
     /**
      * 创建时间
