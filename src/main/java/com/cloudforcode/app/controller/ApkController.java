@@ -53,8 +53,8 @@ public class ApkController {
         return baseEntity;
     }
 
-    @GetMapping("/update/{applicationId}")
-    public BaseEntity updateEntity(@PathVariable("applicationId") String applicationId) {
+    @GetMapping("/update")
+    public BaseEntity updateEntity(@RequestParam("applicationId") String applicationId) {
         LoggerUtils.info(this.getClass(), "获取最新app版本");
         Items<ApkEntity> allEntity = apkService.findAllEntity(applicationId);
         List<ApkEntity> items = allEntity.getItems();

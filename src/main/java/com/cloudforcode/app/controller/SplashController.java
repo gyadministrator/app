@@ -53,8 +53,8 @@ public class SplashController {
         return baseEntity;
     }
 
-    @GetMapping("/update/{applicationId}")
-    public BaseEntity updateEntity(@PathVariable("applicationId")String applicationId) {
+    @GetMapping("/update")
+    public BaseEntity updateEntity(@RequestParam("applicationId")String applicationId) {
         LoggerUtils.info(this.getClass(), "获取最新启动图");
         Items<SplashEntity> allEntity = splashService.findAllEntity(applicationId);
         List<SplashEntity> items = allEntity.getItems();
