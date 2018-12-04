@@ -29,4 +29,29 @@ public class UploadController {
         }
         return JSON.toJSONString(map);
     }
+
+    @PostMapping(value = "/images", produces = {"application/json;charset=utf-8"})
+    public String images(@RequestParam("file") MultipartFile[] file) {
+        LoggerUtils.info(this.getClass(), "上传图片");
+        StringBuilder buffer = new StringBuilder();
+        Map<String, Object> map = new HashMap<>();
+        try {
+            AliyunOSSUtil aliyunOSSUtil = new AliyunOSSUtil();
+            for (int i = 0; i < file.length; i++) {
+                String image = aliyunOSSUtil.uploadFile(file[i], "splash");
+                image = "https://gyapp.oss-cn-beijing.aliyuncs.com/splash/" + image;
+                if (i != 0) {
+                    buffer.append(",");
+                }
+                buffer.append(image);
+            }
+            map.put("code", 200);
+            map.put("data", buffer.toString());
+        } catch (Exception e) {
+            map.put("code", 500);
+            map.put("data", "上传失败");
+            e.printStackTrace();
+        }
+        return JSON.toJSONString(map);
+    }
 }
