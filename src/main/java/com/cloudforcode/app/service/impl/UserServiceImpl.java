@@ -62,6 +62,12 @@ public class UserServiceImpl implements UserService {
         if (userEntity.getImage() != null && !userEntity.getImage().equals("")) {
             entity.setImage(userEntity.getImage());
         }
+        if (userEntity.getAddress() != null && !userEntity.getAddress().equals("")) {
+            entity.setAddress(userEntity.getAddress());
+        }
+        if (userEntity.getPassword() != null && !userEntity.getPassword().equals("")) {
+            entity.setPassword(userEntity.getPassword());
+        }
         return userRepository.save(entity);
     }
 
