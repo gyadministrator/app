@@ -36,8 +36,8 @@ public class UploadController {
         StringBuilder buffer = new StringBuilder();
         Map<String, Object> map = new HashMap<>();
         try {
-            AliyunOSSUtil aliyunOSSUtil = new AliyunOSSUtil();
             for (int i = 0; i < file.length; i++) {
+                AliyunOSSUtil aliyunOSSUtil = new AliyunOSSUtil();
                 String image = aliyunOSSUtil.uploadFile(file[i], "splash");
                 image = "https://gyapp.oss-cn-beijing.aliyuncs.com/splash/" + image;
                 if (i != 0) {
