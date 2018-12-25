@@ -31,15 +31,15 @@ public class UserController {
     @PostMapping("/addUser")
     public BaseEntity addEntity(@RequestBody UserEntity userEntity) {
         LoggerUtils.info(this.getClass(), "添加app" + userEntity.toString());
-        UserEntity u=userService.queryUserByPhone(userEntity.getUsername());
+        UserEntity u = userService.queryUserByPhone(userEntity.getUsername());
         BaseEntity<UserEntity> baseEntity = new BaseEntity<>();
-        if (u==null) {
+        if (u == null) {
             userEntity.setCreateTime(new Date());
             userEntity = userService.addEntity(userEntity);
             baseEntity.setCode(200);
             baseEntity.setData(userEntity);
             baseEntity.setMessage("添加成功");
-        }else {
+        } else {
             baseEntity.setCode(500);
             baseEntity.setData(userEntity);
             baseEntity.setMessage("添加失败");
@@ -80,6 +80,22 @@ public class UserController {
         } else {
             baseEntity.setCode(500);
             baseEntity.setMessage("登录失败");
+            baseEntity.setData(null);
+        }
+        return baseEntity;
+    }
+
+    @GetMapping("/queryUser")
+    public BaseEntity queryUser(@RequestParam("userId") String userId) {
+        UserEntity userEntity = userService.queryUserByPhone(userId);
+        BaseEntity<UserEntity> baseEntity = new BaseEntity<>();
+        if (userEntity != null) {
+            baseEntity.setCode(200);
+            baseEntity.setMessage("查询成功");
+            baseEntity.setData(userEntity);
+        } else {
+            baseEntity.setCode(500);
+            baseEntity.setMessage("查询失败");
             baseEntity.setData(null);
         }
         return baseEntity;
